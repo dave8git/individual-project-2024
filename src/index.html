@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <div>Find your music:</div>
+        <div class="main-nav">
+            <a href="#main">main</a>
+            <a href="#search">search</a>
+            <a href="#random">random</a>
+          </div>
+    </header>
+    <div id="pages">
+        <section id="main">
+            <div class="popup" id="myPopup">
+                <div class="popup-content">
+                    <span class="close-btn" onclick="closePopup()">&times;</span>
+                    <h2>Main</h2>
+                    <div class="submitContainer">
+                        <input></input>
+                        <button id="findAction">Find!</button>
+                    </div>
+                    <p>This is a grey transparent popup with gently rounded corners.</p>
+                </div>
+            </div>
+        </section>
+        <section id="search">
+            <section id="main">
+                <div class="popup" id="myPopup">
+                    <div class="popup-content">
+                        <span class="close-btn" onclick="closePopup()">&times;</span>
+                        <h2>Search</h2>
+                        <p>This is a grey transparent popup with gently rounded corners.</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <section id="random">
+            <div class="booking-wrapper container">
+                <section id="main">
+                    <div class="popup" id="myPopup">
+                        <div class="popup-content">
+                            <span class="close-btn" onclick="closePopup()">&times;</span>
+                            <h2>Random</h2>
+                            <p>This is a grey transparent popup with gently rounded corners.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+        '
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
