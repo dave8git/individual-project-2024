@@ -1,11 +1,22 @@
 import { select } from '../settings.js';
 
 class Categories {
-    constructor(data) {
+    constructor(data, app) {
         const thisCategories = this; 
 
         console.log('categories ruszyło!');
-        this.listCategories(data);
+        
+        thisCategories.listCategories(data);
+        thisCategories.data = data; 
+        thisCategories.app = app;
+        thisCategories.getElements(); 
+    }
+
+    getElements() {
+        const thisCategories = this; 
+        thisCategories.dom = {};
+        thisCategories.dom.audioContainer = document.querySelector(select.containerOf.song);
+        console.log(thisCategories.dom.audioContainer);
     }
 
     listCategories(data) {
@@ -40,15 +51,26 @@ class Categories {
 
         for (let category of allCategories) {
             category.addEventListener('click', function () {
+                event.preventDefault();
+                console.log('ruszył click na kategorii');
                 const href = event.target.getAttribute('href');
                 const categoryName = href.split('-')[1];
-                thisCategories.generateDataByCategory(categoryName);
+                thisCategories.generateDataByCategory(thisCategories.data, categoryName);
+                thisCategories.app.initCategories();
             });
         }
     }
 
-    generateDataByCategory(categoryName) {
+    generateDataByCategory(data, categoryName) {
+        const thisCategories = this; 
         console.log(categoryName);
+        console.log('thisCategories.dom.audioContainer', thisCategories.dom.audioContainer);
+        const filteredSongs = data.filter(song => song.categories.includes(categoryName));
+
+        console.log('filteredSongs', filteredSongs);
+        thisCategories.dom.audioContainer.innerHTML = '';
+        thisCategories.app.initAudio(filteredSongs);
+
     }
 }
 

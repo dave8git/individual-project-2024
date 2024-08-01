@@ -6,8 +6,20 @@ class AudioContainer{
         const thisAudioContainer = this; 
 
         thisAudioContainer.data = data;
-
+        //thisAudioContainer.cleaner();
         thisAudioContainer.render();
+    }
+
+    getElements() {
+        const thisAudioContainer = this; 
+        thisAudioContainer.dom = {};
+        thisAudioContainer.container = document.querySelector(select.containerOf.song);
+    }
+
+    cleaner() {
+        const thisAudioContainer = this; 
+        const container = document.querySelector(select.containerOf.song);
+        container.innerHTML = '';
     }
 
     render() {

@@ -142,13 +142,13 @@ const app = {
     initCategories() {
         const thisApp = this; 
         console.log('initcategories');
-        thisApp.categories = new Categories(thisApp.data.songs);
+        thisApp.categories = new Categories(thisApp.data.songs, thisApp);
     },
 
 
     initAudio: function (data) {
         const thisApp = this;
-
+    
         for (let song in data) {
             //new AudioContainer(); 
             new AudioContainer(data[song]);
