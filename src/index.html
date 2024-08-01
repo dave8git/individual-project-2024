@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/css/green-audio-player.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/css/green-audio-player.min.css">
     <script src="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/js/green-audio-player.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <header>
         <div>Find your music:</div>
@@ -21,7 +23,7 @@
     </header>
     <div id="pages">
         <section id="main">
-            <div class="popup" id="myPopup">
+            <div class="popup">
                 <div class="popup-content">
                     <span class="close-btn" onclick="closePopup()">&times;</span>
                     <h2>Main</h2>
@@ -35,29 +37,24 @@
             </div>
         </section>
         <section id="search">
-            <section id="main">
-                <div class="popup" id="myPopup">
-                    <div class="popup-content">
-                        <span class="close-btn" onclick="closePopup()">&times;</span>
-                        <h2>Search</h2>
-                        <p>This is a grey transparent popup with gently rounded corners.</p>
-                        <div class="musicContainer"></div>
-                    </div>
-                </div>
-            </section>
+            <div class="popup">
+                <div class="popup-content">
+                    <span class="close-btn" onclick="closePopup()">&times;</span>
+                    <h2>Search</h2>
+                    <p>This is a grey transparent popup with gently rounded corners.</p>
+                    <div class="musicContainer"></div>
+        </section>
         </section>
         <section id="random">
             <div class="booking-wrapper container">
-                <section id="main">
-                    <div class="popup" id="myPopup">
-                        <div class="popup-content">
-                            <span class="close-btn" onclick="closePopup()">&times;</span>
-                            <h2>Random</h2>
-                            <p>This is a grey transparent popup with gently rounded corners.</p>
-                            <ul class="musicContainer"></ul>
-                        </div>
+                <div class="popup">
+                    <div class="popup-content">
+                        <span class="close-btn" onclick="closePopup()">&times;</span>
+                        <h2>Random</h2>
+                        <p>This is a grey transparent popup with gently rounded corners.</p>
+                        <ul class="musicContainer"></ul>
                     </div>
-                </section>
+                </div>
             </div>
         </section>
     </div>
@@ -69,8 +66,8 @@
             <a href="#category-{{this}}">{{this}}</a>
             {{/each}}
         </li>
-      </script>    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
+      </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
     <script type="module" src="js/script.js"></script>
 </body>
 

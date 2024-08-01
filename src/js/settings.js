@@ -4,6 +4,7 @@ export const select = {
     },
     containerOf: {
         song: '.musicContainer',
+        categories: '.categoriesContainer'
     },
     all: {
         menuProducts: '#product-list > .product',

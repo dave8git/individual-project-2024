@@ -1,17 +1,52 @@
 import AudioContainer from './components/AudioContainer.js'; //plik musi być z rozszerzenim .js i cudzysłowy muszą być pojedyńcze ''
-import Categories from './components/Categories.js';
+
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 const settings = {
+    amountWidget: {
+        defaultValue: 1,
+        defaultMin: 0,
+        defaultMax: 10,
+    },
     cart: {
         defaultDeliveryFee: 20,
+    },
+    hours: {
+        open: 12,
+        close: 24,
+    },
+    datePicker: {
+        maxDaysInFuture: 14,
+    },
+    booking: {
+        tableIdAttribute: 'data-table',
     },
     db: {
         url: '//localhost:3131',
         songs: 'songs',
+        products: 'products',
+        orders: 'orders',
+        bookings: 'bookings',
+        events: 'events',
+        dateStartParamKey: 'date_gte',
+        dateEndParamKey: 'date_lte',
+        notRepeatParam: 'repeat=false',
+        repeatParam: 'repeat_ne=false',
     },
+
 };
 
 const classNames = {
+    menuProduct: {
+        wrapperActive: 'active',
+        imageVisible: 'active',
+    },
+    cart: {
+        wrapperActive: 'active',
+    },
+    booking: {
+        loading: 'loading',
+        tableBooked: 'booked',
+    },
     nav: {
         active: 'active',
     },
@@ -32,17 +67,63 @@ const select = {
         pages: '#pages',
         booking: '.booking-wrapper',
         player: '.musicContainer',
+        categories: '.categoriesContainer'
     },
-    
+    all: {
+        menuProducts: '#product-list > .product',
+        menuProductsActive: '#product-list > .product.active',
+        formInputs: 'input, select',
+    },
     menuProduct: {
+        clickable: '.product__header',
+        form: '.product__order',
+        priceElem: '.product__total-price .price',
+        imageWrapper: '.product__images',
         amountWidget: '.widget-amount',
         cartButton: '[href="#add-to-cart"]',
     },
-
+    widgets: {
+        amount: {
+            input: 'input.amount', //'input[name="amount"]',
+            linkDecrease: 'a[href="#less"]',
+            linkIncrease: 'a[href="#more"]',
+        },
+        datePicker: {
+            wrapper: '.date-picker',
+            input: `input[name="date"]`,
+        },
+        hourPicker: {
+            wrapper: '.hour-picker',
+            input: 'input[type="range"]',
+            output: '.output',
+        },
+    },
+    booking: {
+        peopleAmount: '.people-amount',
+        hoursAmount: '.hours-amount',
+        tables: '.floor-plan .table',
+    },
     nav: {
         links: '.main-nav a',
     },
- 
+    cart: {
+        productList: '.cart__order-summary',
+        toggleTrigger: '.cart__summary',
+        totalNumber: `.cart__total-number`,
+        totalPrice: '.cart__total-price strong, .cart__order-total .cart__order-price-sum strong',
+        subtotalPrice: '.cart__order-subtotal .cart__order-price-sum strong',
+        deliveryFee: '.cart__order-delivery .cart__order-price-sum strong',
+        form: '.cart__order',
+        formSubmit: '.cart__order [type="submit"]',
+        phone: '[name="phone"]',
+        address: '[name="address"]',
+    },
+    cartProduct: {
+        amountWidget: '.widget-amount',
+        price: '.cart__product-price',
+        edit: '[href="#edit"]',
+        remove: '[href="#remove"]',
+    },
 };
 
 
@@ -131,27 +212,68 @@ const app = {
                 thisApp.data.songs = parsedResponse;
                 // console.log(thisApp.data.songs);
                 /* execute initMenu method */
-                thisApp.initAudio(thisApp.data.songs);
+                thisApp.initData();
                 thisApp.initCategories(); 
             });
 
         console.log('thisApp.data', JSON.stringify(thisApp.data));
 
     },
+    listCategories: function (data) {
+        const thisApp = this;
+        const categories = [];
+        for (let category of data) {
+            for (let singleCategory of category.categories) {
+                if (!categories.includes(singleCategory)) {
+                    categories.push(singleCategory);
+                }
+            }
+        }
 
-    initCategories() {
-        const thisApp = this; 
-        console.log('initcategories');
-        thisApp.categories = new Categories(thisApp.data.songs);
+        const categoriesContainer = document.querySelector(select.containerOf.categories);
+        let links = '';
+
+        for (let category of categories) {
+            links += `<a href="#category-${category}">${category}</a>`
+        }
+        console.log('categories', categories);
+        categoriesContainer.innerHTML = links;
+
+        thisApp.initCategories();
+    },
+
+    initCategories: function () {
+        const thisApp = this;
+
+        const allCategories = document.querySelectorAll('a[href^="#category-"]');
+
+        for (let category of allCategories) {
+            category.addEventListener('click', thisApp.categoryListener);
+        }
     },
 
 
-    initAudio: function (data) {
+    generateDataByCategory: function () {
         const thisApp = this;
 
-        for (let song in data) {
+        console.log('thisApp', thisApp);
+    },
+
+    categoryListener: function () {
+        const thisApp = this;
+        //console.log('event.target', event.target);
+        const href = event.target.getAttribute('href');
+        console.log('href', href);
+        const categoryName = href.split('-')[1];
+        thisApp.generateDataByCategory(categoryName);
+    },
+
+    initAudio: function () {
+        const thisApp = this;
+
+        for (let song in thisApp.data.songs) {
             //new AudioContainer(); 
-            new AudioContainer(data[song]);
+            new AudioContainer(thisApp.data.songs[song]);
         }
     },
 
@@ -159,8 +281,10 @@ const app = {
         const thisApp = this;
         console.log('*** App starting ***');
         thisApp.initPages();
-        thisApp.initData();
+
+
         //thisApp.inputHide();
+
     },
 };
 
