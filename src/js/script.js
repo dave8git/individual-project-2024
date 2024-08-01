@@ -1,3 +1,5 @@
+import AudioContainer from './components/AudioContainer.js'; //plik musi być z rozszerzenim .js i cudzysłowy muszą być pojedyńcze ''
+
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 const settings = {
     amountWidget: {
@@ -20,6 +22,7 @@ const settings = {
     },
     db: {
         url: '//localhost:3131',
+        songs: 'songs',
         products: 'products',
         orders: 'orders',
         bookings: 'bookings',
@@ -63,6 +66,8 @@ const select = {
         cart: '#cart',
         pages: '#pages',
         booking: '.booking-wrapper',
+        player: '.musicContainer',
+        categories: '.categoriesContainer'
     },
     all: {
         menuProducts: '#product-list > .product',
@@ -149,12 +154,11 @@ const select = {
 
     let pageMatchingHash = thisApp.pages[0].id; 
 
-    console.log('initPages runs');
     for(let page of thisApp.pages) {
       if(page.id == idFromHash) {
   // eslint-disable-next-line no-unused-vars
         pageMatchingHash = page.id;
-        console.log(pageMatchingHash);
+        // console.log(pageMatchingHash);
         break; // dzięki break nie zostaną wykonane dalsze pętle jeżeli warunek będzie prawidziwy. 
       }
     }
@@ -178,14 +182,8 @@ const select = {
 
   activatePage: function(pageId) {
     const thisApp = this; 
-    console.log('activePage runs');
     /* add class "active" to matching pages, remove from non-matching */
     for(let page of thisApp.pages) {
-      // if(page.id == pageId) {
-      //   page.classList.add(classNames.pages.active);
-      // } else {
-      //   page.classList.remove(classNames.pages.active);
-      // }
       page.classList.toggle(classNames.pages.active, page.id == pageId);
     }
     /* add class "active" to matching links, remove from non-matching */
@@ -197,11 +195,63 @@ const select = {
       );
     }
   },
+  initData: function() {
+    const thisApp = this; 
+    thisApp.data = {};
+
+    const url = settings.db.url + '/' + settings.db.songs;
+
+    fetch(url)
+        .then(function(rawResponse){
+            return rawResponse.json(); 
+        })
+        .then(function(parsedResponse){
+            // console.log('parsedResponse', parsedResponse);
+
+            /* save parsedResponse as thisApp.data.products */
+            thisApp.data.songs = parsedResponse; 
+            // console.log(thisApp.data.songs);
+            /* execute initMenu method */ 
+            thisApp.listCategories(thisApp.data.songs);
+            thisApp.initAudio();
+        });
+
+    console.log('thisApp.data', JSON.stringify(thisApp.data));
+
+  },
+  listCategories: function(data) {
+    const categories = [];
+    for(let category of data) {
+        for(let singleCategory of category.categories) {
+            if(!categories.includes(singleCategory)) {
+                categories.push(singleCategory);
+            }
+        }
+    }
+
+    const categoriesContainer = document.querySelector(select.containerOf.categories);
+    let links = '';
+
+    for (let category of categories) {
+        links += `<a href="#${category}">${category}</a>`
+    }
+    console.log('categories', categories);
+    categoriesContainer.innerHTML = links;
+  }, 
+  initAudio: function()  {
+    const thisApp = this; 
+
+    for (let song in thisApp.data.songs) {
+        //new AudioContainer(); 
+        new AudioContainer(thisApp.data.songs[song]);
+    }
+  },
 
   init: function () {
     const thisApp = this;
     console.log('*** App starting ***');
     thisApp.initPages();
+    thisApp.initData();
     //thisApp.inputHide();
 
   },

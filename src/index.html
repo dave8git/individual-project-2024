@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/css/green-audio-player.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/js/green-audio-player.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
     <header>
         <div>Find your music:</div>
@@ -15,7 +16,8 @@
             <a href="#main">main</a>
             <a href="#search">search</a>
             <a href="#random">random</a>
-          </div>
+        </div>
+        <div class="categoriesContainer"></div>
     </header>
     <div id="pages">
         <section id="main">
@@ -24,8 +26,9 @@
                     <span class="close-btn" onclick="closePopup()">&times;</span>
                     <h2>Main</h2>
                     <div class="submitContainer">
-                        <input></input>
-                        <button id="findAction">Find!</button>
+                        <input type="text"></input>
+                        <button type="button" id="findAction">Find!</button>
+                        <div class="musicContainer"></div>
                     </div>
                     <p>This is a grey transparent popup with gently rounded corners.</p>
                 </div>
@@ -38,6 +41,7 @@
                         <span class="close-btn" onclick="closePopup()">&times;</span>
                         <h2>Search</h2>
                         <p>This is a grey transparent popup with gently rounded corners.</p>
+                        <div class="musicContainer"></div>
                     </div>
                 </div>
             </section>
@@ -50,15 +54,21 @@
                             <span class="close-btn" onclick="closePopup()">&times;</span>
                             <h2>Random</h2>
                             <p>This is a grey transparent popup with gently rounded corners.</p>
+                            <ul class="musicContainer"></ul>
                         </div>
                     </div>
                 </section>
             </div>
         </section>
-        '
     </div>
-
-    <script src="js/script.js"></script>
+    <script id="template-song-player" type="text/x-handlebars-template">
+        <li>
+            <div>{{title}}</div>
+            <audio></audio>
+        </li>
+      </script>    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
+    <script type="module" src="js/script.js"></script>
 </body>
 
 </html>
