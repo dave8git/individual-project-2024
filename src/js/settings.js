@@ -8,12 +8,20 @@ export const select = {
         categories: '.categoriesContainer',
         search: '.searchContainer',
         input: '#nameInput',
-        searchButton: '#findAction2'
+        searchButton: '#findAction2',
+        menu: '#product-list',
+        cart: '#cart',
+        pages: '#pages',
+        booking: '.booking-wrapper',
+        player: '.musicContainer',
     },
     all: {
         menuProducts: '#product-list > .product',
         menuProductsActive: '#product-list > .product.active',
         formInputs: 'input, select',
+    }, 
+    nav: {
+        links: '.main-nav a',
     },
 };
 

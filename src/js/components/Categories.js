@@ -52,7 +52,7 @@ class Categories {
                 event.preventDefault();
                 console.log('ruszył click na kategorii');
                 const href = event.target.getAttribute('href');
-                const categoryName = href.split('-')[1];
+                const categoryName = href.split('-')[1]; //
                 thisCategories.generateDataByCategory(thisCategories.data, categoryName);
                 thisCategories.app.initCategories();
             });
@@ -65,7 +65,7 @@ class Categories {
         const filteredSongs = data.filter(song => song.categories.includes(categoryName));
 
         thisCategories.dom.audioContainer.innerHTML = '';
-        thisCategories.app.initAudio(filteredSongs);
+        thisCategories.app.initAudio(filteredSongs, thisCategories.dom.audioContainer);
 
     }
 }

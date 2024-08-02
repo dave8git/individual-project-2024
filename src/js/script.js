@@ -1,6 +1,7 @@
 import AudioContainer from './components/AudioContainer.js'; //plik musi być z rozszerzenim .js i cudzysłowy muszą być pojedyńcze ''
 import Categories from './components/Categories.js';
 import Search from './components/Search.js';
+import { select } from './settings.js';
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 const settings = {
     cart: {
@@ -21,30 +22,7 @@ const classNames = {
     }
 };
 
-const select = {
-    templateOf: {
-        menuProduct: "#template-menu-product",
-        cartProduct: '#template-cart-product',
-        bookingWidget: '#template-booking-widget',
-    },
-    containerOf: {
-        menu: '#product-list',
-        cart: '#cart',
-        pages: '#pages',
-        booking: '.booking-wrapper',
-        player: '.musicContainer',
-    },
-    
-    menuProduct: {
-        amountWidget: '.widget-amount',
-        cartButton: '[href="#add-to-cart"]',
-    },
 
-    nav: {
-        links: '.main-nav a',
-    },
- 
-};
 
 
 const app = {
@@ -129,10 +107,11 @@ const app = {
                 // console.log('parsedResponse', parsedResponse);
 
                 /* save parsedResponse as thisApp.data.products */
+             
                 thisApp.data.songs = parsedResponse;
                 // console.log(thisApp.data.songs);
                 /* execute initMenu method */
-                thisApp.initAudio(thisApp.data.songs);
+                thisApp.initAudio(thisApp.data.songs, thisApp.container);
                 thisApp.initCategories(); 
                 thisApp.initSearch();
             });
@@ -152,18 +131,22 @@ const app = {
         thisApp.search = new Search(thisApp.data.songs, thisApp);
     },
 
-    initAudio: function (data) {
+    initAudio: function (data, container) {
         const thisApp = this;
     
         for (let song in data) {
             //new AudioContainer(); 
-            new AudioContainer(data[song]);
+            new AudioContainer(data[song], container);
         }
     },
 
     init: function () {
         const thisApp = this;
         console.log('*** App starting ***');
+        const containerSelector = '#main ' + select.containerOf.song
+        console.log(containerSelector);
+        thisApp.container = document.querySelector(containerSelector);
+        console.log('thisApp.container', thisApp.container);
         thisApp.initPages();
         thisApp.initData();
         //thisApp.inputHide();

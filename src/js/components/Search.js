@@ -23,8 +23,8 @@ class Search {
         const thisSearch = this; 
         const generatedHTML = templates.search();
         thisSearch.element = utils.createDOMFromHTML(generatedHTML);
-        const container = document.querySelector(select.containerOf.search);
-        container.appendChild(thisSearch.element);
+        thisSearch.container = document.querySelector(select.containerOf.search);
+        thisSearch.container.appendChild(thisSearch.element);
     }
 
     initActions() {
@@ -39,7 +39,7 @@ class Search {
         const thisSearch = this;
         const songs = [];
         const searchInput = value.toLowerCase();
-
+        const searchContainer = thisSearch.container.querySelector(select.containerOf.song);
         const filteredSongs = thisSearch.data.filter(song => {
             const titleMatch = song.title.toLowerCase().includes(searchInput);
             const authorMatch = song.author.toString().toLowerCase().includes(searchInput); // Assuming author is a string now
@@ -48,7 +48,7 @@ class Search {
             };
         });
 
-        thisSearch.app.initAudio(songs);
+        thisSearch.app.initAudio(songs, searchContainer);
         console.log('songs', songs);
     }
 
