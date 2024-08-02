@@ -41,8 +41,9 @@
                 <div class="popup-content">
                     <span class="close-btn" onclick="closePopup()">&times;</span>
                     <h2>Search</h2>
-                    <p>This is a grey transparent popup with gently rounded corners.</p>
+                    <div class="searchContainer"></div>
                     <div class="musicContainer"></div>
+                    <button type="button" id="findAction2">Find!</button>
         </section>
         </section>
         <section id="random">
@@ -62,12 +63,24 @@
         <li>
             <div>{{title}}</div>
             <audio></audio>
-        
-                {{#each categories}}
-                <a href="#category-{{this}}">{{this}}</a>
-                {{/each}}
-        
-           
+            {{#each categories}}
+            <a href="#category-{{this}}">{{this}}</a>
+            {{/each}}
+        </li>
+    </script>
+    <script id="template-search" type="text/x-handlebars-template">
+        <li>
+            <div>
+                <label for="nameInput">Name</label>
+                <input type="text" id="nameInput" name="name">
+                <label for="categoryInput">Category</label>
+                <select id="categoryInput" name="category">
+                  <option value="Option 1">Option 1</option>
+                  <option value="Option 2">Option 2</option>
+                  <option value="Option 3">Option 3</option>
+                </select>
+              </div>
+              <button>Search</button>
         </li>
       </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>

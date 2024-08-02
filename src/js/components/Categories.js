@@ -31,8 +31,6 @@ class Categories {
         }
 
         const categoriesContainer = document.querySelector(select.containerOf.categories);
-        console.log('select.containerOf.categories', select);
-        console.log('categoriesContainer', categoriesContainer);
 
         let links = '';
 
@@ -63,11 +61,9 @@ class Categories {
 
     generateDataByCategory(data, categoryName) {
         const thisCategories = this; 
-        console.log(categoryName);
-        console.log('thisCategories.dom.audioContainer', thisCategories.dom.audioContainer);
+
         const filteredSongs = data.filter(song => song.categories.includes(categoryName));
 
-        console.log('filteredSongs', filteredSongs);
         thisCategories.dom.audioContainer.innerHTML = '';
         thisCategories.app.initAudio(filteredSongs);
 

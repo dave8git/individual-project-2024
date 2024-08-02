@@ -1,5 +1,6 @@
 import AudioContainer from './components/AudioContainer.js'; //plik musi być z rozszerzenim .js i cudzysłowy muszą być pojedyńcze ''
 import Categories from './components/Categories.js';
+import Search from './components/Search.js';
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 const settings = {
     cart: {
@@ -133,6 +134,7 @@ const app = {
                 /* execute initMenu method */
                 thisApp.initAudio(thisApp.data.songs);
                 thisApp.initCategories(); 
+                thisApp.initSearch();
             });
 
         console.log('thisApp.data', JSON.stringify(thisApp.data));
@@ -145,6 +147,10 @@ const app = {
         thisApp.categories = new Categories(thisApp.data.songs, thisApp);
     },
 
+    initSearch() {
+        const thisApp = this;
+        thisApp.search = new Search(thisApp.data.songs, thisApp);
+    },
 
     initAudio: function (data) {
         const thisApp = this;
