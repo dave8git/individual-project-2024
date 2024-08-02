@@ -9,12 +9,18 @@ class AudioContainer{
         //thisAudioContainer.cleaner();
         thisAudioContainer.container = container;
         thisAudioContainer.render();
+        thisAudioContainer.initActions(); 
     }
 
-    cleaner() {
+    initActions() {
         const thisAudioContainer = this; 
-        const container = document.querySelector(select.containerOf.song);
-        container.innerHTML = '';
+        thisAudioContainer.element.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                link.dispatchEvent(new Event('categoryClick', {
+                    bubbles: true,
+                }));
+            });
+        });
     }
 
     render() {
