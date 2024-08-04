@@ -10,6 +10,8 @@ class Search {
         thisSearch.getElements(); 
         // thisSearch.input()
         thisSearch.initActions(); 
+
+        console.log('thisSearch.data', thisSearch.data);
     }
 
     getElements() {
@@ -19,9 +21,16 @@ class Search {
         thisSearch.dom.input = document.querySelector(select.containerOf.input);
         thisSearch.dom.searchButton = document.querySelector(select.containerOf.searchButton);
     }
+
+    prepareData() {
+        const thisSearch = this;
+        return [...new Set(thisSearch.data.flatMap(song => song.categories))]; // Get unique categories
+    }
     render() {
-        const thisSearch = this; 
-        const generatedHTML = templates.search();
+        const thisSearch = this;
+        const categories = thisSearch.prepareData();
+        console.log('categories:', categories); // Debug statement
+        const generatedHTML = templates.search({ categories }); // funkcja prepareData() zwraca tablicę więc, żeby ją przekazać do handlebars trzeba dodać {}
         thisSearch.element = utils.createDOMFromHTML(generatedHTML);
         thisSearch.container = document.querySelector(select.containerOf.search);
         thisSearch.container.appendChild(thisSearch.element);

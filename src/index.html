@@ -76,9 +76,11 @@
                 <input type="text" id="nameInput" name="name">
                 <label for="categoryInput">Category</label>
                 <select id="categoryInput" name="category">
-                  <option value="Option 1">Option 1</option>
-                  <option value="Option 2">Option 2</option>
-                  <option value="Option 3">Option 3</option>
+                    {{#each categories}}
+                        <option value="test">{{this}}</option>
+                    {{/each}}
+                  <!-- <option value="Option 2">Option 2</option>
+                  <option value="Option 3">Option 3</option> -->
                 </select>
               </div>
               <button>Search</button>
