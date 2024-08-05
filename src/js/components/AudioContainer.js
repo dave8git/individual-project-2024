@@ -40,24 +40,24 @@ class AudioContainer{
                 selector: 'audioSelector',
                 stopOthersOnPlay: true
             })
+
         const audios = document.querySelectorAll('.audioSelector');
-        audios.forEach(audio => {
-            audio.addEventListener('play', () => {
-                // if(!audio.pause) {
-                //     console.log('playing');
-                // }
-               
-                thisAudioContainer.audioStopper(audio);
-            })
-        })
+        console.log('audios', audios);
+        for (let audio of audios) {
+            console.log('audio', audio);
+            audio.addEventListener('play', function() {
+                console.log('play pressed');
+            });
+        }
+      
     }
 
-    audioStopper() {
+    audioStopper(exceptAudio) {
         const thisAudioContainer = this; 
         const audios = document.querySelectorAll('audio');
         audios.forEach(audio => {
-            if(!audio.pause) {
-                audio.pause(); 
+            if(audio !== exceptAudio && !audio.paused) { // jeżeli audio nie równa się aktualnie klikany element audio i nie jest zapauzowane
+                audio.pause();  
                 audio.currentTime = 0;
             }
         });
