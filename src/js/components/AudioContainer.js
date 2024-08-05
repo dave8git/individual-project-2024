@@ -10,6 +10,7 @@ class AudioContainer{
         thisAudioContainer.container = container;
         thisAudioContainer.render();
         thisAudioContainer.initActions(); 
+        thisAudioContainer.initializePlayers();
     }
 
     initActions() {
@@ -31,7 +32,36 @@ class AudioContainer{
         thisAudioContainer.container.appendChild(thisAudioContainer.element);
     }
 
+    initializePlayers() {
+        const thisAudioContainer = this; 
+        console.log('initializePlayers started');
+   
+            GreenAudioPlayer.init({
+                selector: 'audioSelector',
+                stopOthersOnPlay: true
+            })
+        const audios = document.querySelectorAll('.audioSelector');
+        audios.forEach(audio => {
+            audio.addEventListener('play', () => {
+                // if(!audio.pause) {
+                //     console.log('playing');
+                // }
+               
+                thisAudioContainer.audioStopper(audio);
+            })
+        })
+    }
 
+    audioStopper() {
+        const thisAudioContainer = this; 
+        const audios = document.querySelectorAll('audio');
+        audios.forEach(audio => {
+            if(!audio.pause) {
+                audio.pause(); 
+                audio.currentTime = 0;
+            }
+        });
+    }
 }
 
 export default AudioContainer;

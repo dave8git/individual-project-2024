@@ -25,6 +25,9 @@ class Search {
     prepareData() {
         const thisSearch = this;
         return [...new Set(thisSearch.data.flatMap(song => song.categories))]; // Get unique categories
+        //flatMap tutaj weźmie wszystkie tablice categories i zrzuci je do jednej, i dopiero potem przechodzi po piosenkach
+        // oczywiście Set weźmie tą jedną tablicę "sklejoną" ze wszystkich tablic categories w obiektach i usunie duplikaty
+        // spread operator ... zrobi z tego wszystkiego ponowni tablicę.
     }
     render() {
         const thisSearch = this;
@@ -60,8 +63,6 @@ class Search {
         thisSearch.app.initAudio(songs, searchContainer);
         console.log('songs', songs);
     }
-
-
 }
 
 export default Search; 

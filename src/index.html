@@ -5,12 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/css/green-audio-player.min.css">
-    <script src="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/js/green-audio-player.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/css/green-audio-player.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
     <header>
         <div>Find your music:</div>
@@ -63,7 +60,10 @@
     <script id="template-song-player" type="text/x-handlebars-template">
         <li>
             <div>{{title}}</div>
-            <audio></audio>
+            <audio class="audioSelector" controls>
+                <source src="/songs/{{filename}}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
             {{#each categories}}
             <a href="#category-{{this}}">{{this}}</a>
             {{/each}}
@@ -87,6 +87,7 @@
               <div class="musicContainer"></div>
         </li>
     </script>
+    <script src="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/js/green-audio-player.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
     <script type="module" src="js/script.js"></script>
 </body>
