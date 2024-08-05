@@ -44,7 +44,16 @@ class Search {
         thisSearch.dom.searchButton.addEventListener('click', function() {
             const value = thisSearch.dom.input.value;
             thisSearch.input(value);
-        });
+
+            const customEvent = new CustomEvent('customPlayEvent', {
+                bubbles: true, 
+                detail: {
+                    element: thisSearch.element,
+                }
+    
+            });
+            thisSearch.element.dispatchEvent(customEvent);
+        }); 
     }
 
     input(value) {

@@ -137,19 +137,33 @@ const app = {
     
         for (let song in data) {
             //new AudioContainer(); 
-            new AudioContainer(data[song], container);
+            new AudioContainer(data[song], container, thisApp);
         }
     },
 
-    addEventListenerOnPlay() {
+    initRandom: function() {
+        const thisApp = this; 
+        thisApp.random = new Random();
+    },
+
+    catchEvent: function() {
+        const thisApp = this; 
+        document.addEventListener('customPlayEvent', e => {
+            console.log('customPlayEvent', e.target); // i teraz dostajemy cały element gdzie funkcja addEventListnerOnPlay może sobie wyszukać
+        })
+    },
+
+    addEventListenerOnPlay: function() {
+        const thisApp = this; 
         const audios = document.querySelectorAll('.audioSelector');
-        console.log('audios', audios);
+      
         const numberOfPlayClicks = {};
         for (let audio of audios) {
             console.log('audio', audio);
             audio.addEventListener('play', function(e) {
                 console.log('play pressed', e.target);
-                const clickedSrc = e.target.querySelector('source').getAttribute('src');
+
+            const clickedSrc = e.target.querySelector('source').getAttribute('src');
             if (numberOfPlayClicks[clickedSrc]) {
                 numberOfPlayClicks[clickedSrc]++;
             } else {
@@ -170,6 +184,7 @@ const app = {
         console.log('thisApp.container', thisApp.container);
         thisApp.initPages();
         thisApp.initData();
+        thisApp.catchEvent();
         //thisApp.inputHide();
     },
 };

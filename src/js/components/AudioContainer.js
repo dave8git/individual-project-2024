@@ -2,10 +2,11 @@ import { templates, select } from '../settings.js';
 import { utils } from '../utils.js';
 
 class AudioContainer{
-    constructor(data, container) {
+    constructor(data, container, app) {
         const thisAudioContainer = this; 
 
         thisAudioContainer.data = data;
+        thisAudioContainer.app = app; 
         //thisAudioContainer.cleaner();
         thisAudioContainer.container = container;
         thisAudioContainer.render();
@@ -41,8 +42,14 @@ class AudioContainer{
                 stopOthersOnPlay: true
             })
 
+        const audios = document.querySelectorAll('.audioSelector');
         
-      
+        audios.forEach(audio => {
+
+            audio.addEventListener('play', () => {
+                thisAudioContainer.audioStopper(audio);
+            })
+        })
     }
 
     audioStopper(exceptAudio) {
