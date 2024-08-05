@@ -41,14 +41,7 @@ class AudioContainer{
                 stopOthersOnPlay: true
             })
 
-        const audios = document.querySelectorAll('.audioSelector');
-        console.log('audios', audios);
-        for (let audio of audios) {
-            console.log('audio', audio);
-            audio.addEventListener('play', function() {
-                console.log('play pressed');
-            });
-        }
+        
       
     }
 

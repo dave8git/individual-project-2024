@@ -114,6 +114,7 @@ const app = {
                 thisApp.initAudio(thisApp.data.songs, thisApp.container);
                 thisApp.initCategories(); 
                 thisApp.initSearch();
+                thisApp.addEventListenerOnPlay();
             });
 
         console.log('thisApp.data', JSON.stringify(thisApp.data));
@@ -137,6 +138,26 @@ const app = {
         for (let song in data) {
             //new AudioContainer(); 
             new AudioContainer(data[song], container);
+        }
+    },
+
+    addEventListenerOnPlay() {
+        const audios = document.querySelectorAll('.audioSelector');
+        console.log('audios', audios);
+        const numberOfPlayClicks = {};
+        for (let audio of audios) {
+            console.log('audio', audio);
+            audio.addEventListener('play', function(e) {
+                console.log('play pressed', e.target);
+                const clickedSrc = e.target.querySelector('source').getAttribute('src');
+            if (numberOfPlayClicks[clickedSrc]) {
+                numberOfPlayClicks[clickedSrc]++;
+            } else {
+
+                numberOfPlayClicks[clickedSrc] = 1;
+            }
+                console.log(numberOfPlayClicks);
+            });
         }
     },
 

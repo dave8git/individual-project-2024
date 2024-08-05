@@ -61,6 +61,7 @@ class Categories {
         const href = event.target.getAttribute('href');
         const categoryName = href.split('-')[1]; //
         thisCategories.generateDataByCategory(thisCategories.data, categoryName);
+        thisCategories.app.addEventListenerOnPlay();
     }
 
     generateDataByCategory(data, categoryName) {
