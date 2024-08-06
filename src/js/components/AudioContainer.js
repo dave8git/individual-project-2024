@@ -10,7 +10,6 @@ class AudioContainer{
         //thisAudioContainer.cleaner();
         thisAudioContainer.container = container;
         thisAudioContainer.render();
-        thisAudioContainer.initActions(); 
         thisAudioContainer.initializePlayers();
         thisAudioContainer.initActions(); 
     }

@@ -1,6 +1,7 @@
 import AudioContainer from './components/AudioContainer.js'; //plik musi być z rozszerzenim .js i cudzysłowy muszą być pojedyńcze ''
 import Categories from './components/Categories.js';
 import Search from './components/Search.js';
+import Random from './components/Random.js';
 import { select } from './settings.js';
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 const settings = {
@@ -114,6 +115,7 @@ const app = {
                 thisApp.initAudio(thisApp.data.songs, thisApp.container);
                 thisApp.initCategories(); 
                 thisApp.initSearch();
+                thisApp.initRandom(); 
                 //thisApp.addEventListenerOnPlay();
             });
 
@@ -143,7 +145,7 @@ const app = {
 
     initRandom: function() {
         const thisApp = this; 
-        thisApp.random = new Random();
+        thisApp.random = new Random(thisApp.numberOfPlayClicks, thisApp.data.songs);
     },
 
     catchEvent: function() {

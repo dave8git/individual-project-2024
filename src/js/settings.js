@@ -30,6 +30,9 @@ export const classNames = {
         wrapperActive: 'active',
         imageVisible: 'active',
     },
+    random: {
+        randomButton: '.randomButton',
+    }
 
 };
 
