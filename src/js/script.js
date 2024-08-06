@@ -153,9 +153,10 @@ const app = {
         })
     },
 
-    addEventListenerOnPlay: function() {
+    addEventListenerOnPlay: function(element) {
         const thisApp = this; 
-        const audios = document.querySelectorAll('.audioSelector');
+        const selectorContext = element || document;
+        const audios = selectorContext.querySelectorAll('.audioSelector');
       
         const numberOfPlayClicks = {};
         for (let audio of audios) {
@@ -164,13 +165,13 @@ const app = {
                 console.log('play pressed', e.target);
 
             const clickedSrc = e.target.querySelector('source').getAttribute('src');
-            if (numberOfPlayClicks[clickedSrc]) {
-                numberOfPlayClicks[clickedSrc]++;
+            if (thisApp.numberOfPlayClicks[clickedSrc]) {
+                thisApp.numberOfPlayClicks[clickedSrc]++;
             } else {
 
-                numberOfPlayClicks[clickedSrc] = 1;
+                thisApp.numberOfPlayClicks[clickedSrc] = 1;
             }
-                console.log(numberOfPlayClicks);
+                console.log(thisApp.numberOfPlayClicks);
             });
         }
     },
@@ -181,6 +182,7 @@ const app = {
         const containerSelector = '#main ' + select.containerOf.song
         console.log(containerSelector);
         thisApp.container = document.querySelector(containerSelector);
+        thisApp.numberOfPlayClicks = {};
         console.log('thisApp.container', thisApp.container);
         thisApp.initPages();
         thisApp.initData();

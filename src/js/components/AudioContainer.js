@@ -12,6 +12,8 @@ class AudioContainer{
         thisAudioContainer.render();
         thisAudioContainer.initActions(); 
         thisAudioContainer.initializePlayers();
+        thisAudioContainer.initActions(); 
+        thisAudioContainer.createCustomEvent(); 
     }
 
     initActions() {
@@ -23,6 +25,19 @@ class AudioContainer{
                 }));
             });
         });
+        console.log('initActions started in AudioContainer.js');
+    }
+
+    createCustomEvent() {
+        const thisAudioContainer = this; 
+        const customEvent = new CustomEvent('customPlayEvent', {
+            bubbles: true, 
+            detail: {
+                element: thisAudioContainer.element,
+            }
+        });
+        thisAudioContainer.element.dispatchEvent(customEvent);
+
     }
 
     render() {

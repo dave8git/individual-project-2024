@@ -3,19 +3,20 @@ import { utils } from '../utils.js';
 
 class Random {
     constructor(data, app) {
-        const thisSearch = this; 
-       
+        const thisRandom = this; 
+
     }
 
     getElements() {
+        const thisRandom = this;
+        thisRandom.dom = {}; 
+        thisRandom.randomButton = document.querySelector();
 
     }
 
     render() {
-        
+        const thisRandom = this;
     }
-
-
 }
 
 export default Random; 

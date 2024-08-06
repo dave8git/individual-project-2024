@@ -68,8 +68,10 @@ class Search {
                 songs.push(song);
             };
         });
-
+        const musicPlayers = thisSearch.element.querySelector(select.containerOf.player);
+        musicPlayers.innerHTML = '';
         thisSearch.app.initAudio(songs, searchContainer);
+        thisSearch.app.addEventListenerOnPlay(thisSearch.element);
         console.log('songs', songs);
     }
 }
