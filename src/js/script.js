@@ -114,7 +114,7 @@ const app = {
                 thisApp.initAudio(thisApp.data.songs, thisApp.container);
                 thisApp.initCategories(); 
                 thisApp.initSearch();
-                thisApp.addEventListenerOnPlay();
+                //thisApp.addEventListenerOnPlay();
             });
 
         console.log('thisApp.data', JSON.stringify(thisApp.data));
@@ -150,20 +150,6 @@ const app = {
         const thisApp = this; 
         document.addEventListener('customPlayEvent', e => {
             console.log('customPlayEvent', e.target); // i teraz dostajemy cały element gdzie funkcja addEventListnerOnPlay może sobie wyszukać
-        })
-    },
-
-    addEventListenerOnPlay: function(element) {
-        const thisApp = this; 
-        const selectorContext = element || document;
-        const audios = selectorContext.querySelectorAll('.audioSelector');
-      
-        const numberOfPlayClicks = {};
-        for (let audio of audios) {
-            console.log('audio', audio);
-            audio.addEventListener('play', function(e) {
-                console.log('play pressed', e.target);
-
             const clickedSrc = e.target.querySelector('source').getAttribute('src');
             if (thisApp.numberOfPlayClicks[clickedSrc]) {
                 thisApp.numberOfPlayClicks[clickedSrc]++;
@@ -172,8 +158,7 @@ const app = {
                 thisApp.numberOfPlayClicks[clickedSrc] = 1;
             }
                 console.log(thisApp.numberOfPlayClicks);
-            });
-        }
+        })
     },
 
     init: function () {

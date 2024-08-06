@@ -44,15 +44,6 @@ class Search {
         thisSearch.dom.searchButton.addEventListener('click', function() {
             const value = thisSearch.dom.input.value;
             thisSearch.input(value);
-
-            const customEvent = new CustomEvent('customPlayEvent', {
-                bubbles: true, 
-                detail: {
-                    element: thisSearch.element,
-                }
-    
-            });
-            thisSearch.element.dispatchEvent(customEvent);
         }); 
     }
 
@@ -71,7 +62,7 @@ class Search {
         const musicPlayers = thisSearch.element.querySelector(select.containerOf.player);
         musicPlayers.innerHTML = '';
         thisSearch.app.initAudio(songs, searchContainer);
-        thisSearch.app.addEventListenerOnPlay(thisSearch.element);
+        //thisSearch.app.addEventListenerOnPlay(thisSearch.element);
         console.log('songs', songs);
     }
 }

@@ -13,7 +13,6 @@ class AudioContainer{
         thisAudioContainer.initActions(); 
         thisAudioContainer.initializePlayers();
         thisAudioContainer.initActions(); 
-        thisAudioContainer.createCustomEvent(); 
     }
 
     initActions() {
@@ -26,18 +25,12 @@ class AudioContainer{
             });
         });
         console.log('initActions started in AudioContainer.js');
-    }
-
-    createCustomEvent() {
-        const thisAudioContainer = this; 
-        const customEvent = new CustomEvent('customPlayEvent', {
-            bubbles: true, 
-            detail: {
-                element: thisAudioContainer.element,
-            }
-        });
-        thisAudioContainer.element.dispatchEvent(customEvent);
-
+        thisAudioContainer.audioElem.addEventListener('play', function() {
+            const customEvent = new CustomEvent('customPlayEvent', {
+                bubbles: true, 
+            });
+            thisAudioContainer.element.dispatchEvent(customEvent);
+        })
     }
 
     render() {
@@ -46,6 +39,8 @@ class AudioContainer{
         thisAudioContainer.element = utils.createDOMFromHTML(generatedHTML);
         //const container = document.querySelector(select.containerOf.song);
         thisAudioContainer.container.appendChild(thisAudioContainer.element);
+        thisAudioContainer.audioElem = thisAudioContainer.element.querySelector('audio');
+        console.log(thisAudioContainer.audioElem);
     }
 
     initializePlayers() {
