@@ -1,5 +1,6 @@
 import { templates, select, classNames } from '../settings.js';
 import { utils } from '../utils.js';
+import AudioContainer from './AudioContainer.js';
 
 class Random {
     constructor(object, songs) {
@@ -15,6 +16,7 @@ class Random {
         const thisRandom = this;
         thisRandom.dom = {}; 
         thisRandom.randomButton = document.querySelector(classNames.random.randomButton);
+        thisRandom.randomContainer = document.querySelector('.musicContainerRandom');
         //console.log('random button', thisRandom.randomButton);
 
 
@@ -30,6 +32,7 @@ class Random {
                             .map(key => ({filename: key, played: thisRandom.dataObject[key]}))
                             .sort((a, b) => b.played - a.played)
                             .splice(0, keysArray.length/2);
+            const randomElement = array[Math.floor(Math.random() * array.length)];  
 
                             // zrobić ceil i wylosować jeden element z niej (array)
 
@@ -39,10 +42,18 @@ class Random {
 
                             // mając obiekt jednej piosenki możemy zainicjować audioPlayer
 
-            console.log('array', array);
-
-
+            thisRandom.getObjectByFilename(thisRandom.songs, randomElement);
         });
+    }
+
+    getObjectByFilename(data, filename) {
+        const thisRandom = this; 
+        console.log('data', data);
+        console.log('filename', filename);
+        const song = data.find(song => song.filename === filename.filename);
+        
+        new AudioContainer(song, thisRandom.randomContainer); 
+
     }
 
 }

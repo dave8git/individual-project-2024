@@ -39,7 +39,7 @@ class AudioContainer{
         //const container = document.querySelector(select.containerOf.song);
         thisAudioContainer.container.appendChild(thisAudioContainer.element);
         thisAudioContainer.audioElem = thisAudioContainer.element.querySelector('audio');
-        console.log(thisAudioContainer.audioElem);
+        //console.log(thisAudioContainer.audioElem);
     }
 
     initializePlayers() {

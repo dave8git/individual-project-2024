@@ -152,7 +152,8 @@ const app = {
         const thisApp = this; 
         document.addEventListener('customPlayEvent', e => {
             console.log('customPlayEvent', e.target); // i teraz dostajemy cały element gdzie funkcja addEventListnerOnPlay może sobie wyszukać
-            const clickedSrc = e.target.querySelector('source').getAttribute('src');
+            const clickedSrc = e.target.querySelector('source').getAttribute('src').replace('/songs/', '');
+            console.log('clickedSrc', clickedSrc);
             if (thisApp.numberOfPlayClicks[clickedSrc]) {
                 thisApp.numberOfPlayClicks[clickedSrc]++;
             } else {
@@ -160,8 +161,15 @@ const app = {
                 thisApp.numberOfPlayClicks[clickedSrc] = 1;
             }
                 console.log(thisApp.numberOfPlayClicks);
-        })
+        });
+        //thisApp.getObjectByFilename(thisApp.data.songs, clicke)
     },
+
+    // getObjectByFilename(data, filename) {
+        
+
+    //     console.log('song', song);
+    // },
 
     init: function () {
         const thisApp = this;
