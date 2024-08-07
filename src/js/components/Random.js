@@ -25,9 +25,11 @@ class Random {
     initActions() {
         const thisRandom = this; 
         thisRandom.randomButton.addEventListener('click', function() {
-            console.log('mój data Object: ', thisRandom.dataObject);
-            console.log('songs w random:', thisRandom.songs);
+            thisRandom.randomContainer.innerHTML = '';
             const keysArray = Object.keys(thisRandom.dataObject);
+            if(keysArray.length  === 0 || keysArray.length === 1) {
+                alert('Najpierw posłuchaj jeszcze kilku piosenek z bazy... wciąż się uczę twoich preferencji muzycznych ;)');
+            }
             const array = keysArray
                             .map(key => ({filename: key, played: thisRandom.dataObject[key]}))
                             .sort((a, b) => b.played - a.played)
