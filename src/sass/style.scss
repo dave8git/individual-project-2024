@@ -84,3 +84,28 @@ header > div:first-child {
     font-family: 'Georgia', serif; 
     text-decoration: none;
 }
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: #3498db; /* Primary color */
+    font-weight: bold;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    padding-right: 5px;
+  }
+  
+  a:hover {
+    color: #1d6fa0; /* Darker shade on hover */
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Subtle shadow effect */
+  }
+  
+  a:visited {
+    color: #000000; /* Different color for visited links */
+  }
+  
+  a:active {
+    color: #e74c3c; /* Color when the link is clicked */
+  }
